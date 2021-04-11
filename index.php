@@ -7,5 +7,6 @@ $mail->Subject = 'Here is the subject';
 
 #المحتوى ممكن يكون رسالة عادية او قالب تم انشائه عن طريق الج تي ام ال وكذلك سي  اس اس
 $mail->Body    = '<h1>hellow ammar </h1><br><p>dklgf dslhb fbhsjg srb sjbh </p><form><input type="text"></form>';
+$mail->addAttachment('files/photo.jpg','new.jpg');    //send file to recevire
 $mail->send();
 ?>
