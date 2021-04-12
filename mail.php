@@ -15,8 +15,8 @@ $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose deb
 $mail->isSMTP();                                            //Send using SMTP
 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-$mail->Username   = 'your email';                     //SMTP username
-$mail->Password   = 'your password';                               //SMTP password
+$mail->Username   = 'alaziiammar@gmail.com';                     //SMTP username
+$mail->Password   = 'Iloveyoushahad1';                               //SMTP password
 $mail->SMTPSecure = 'ssl';         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 
 
