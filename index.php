@@ -23,27 +23,34 @@
     </div>
 
     <?php require_once 'mail.php';
-    if (isset($_POST['send'])) {
-        $subject = $_POST['subject'];
-        $email = $_POST['recevire'];
-        $message = $_POST['message'];
-        move_uploaded_file($_FILES['file']['tmp_name'], $_FILES['file']['name']);
-        $fie = $_FILES['file']['name'];
+    session_start();
+    if (empty($_SESSION['z'])) {
+       echo 'sesssion is empty';
+      # header("location:mail.php");
+    } else {
+        echo '<h1>'.$_SESSION['z'].'</h1>';
+            if (isset($_POST['send'])) {
+                $subject = $_POST['subject'];
+                $email = $_POST['recevire'];
+                $message = $_POST['message'];
+                move_uploaded_file($_FILES['file']['tmp_name'], $_FILES['file']['name']);
+                $fie = $_FILES['file']['name'];
 
-        $mail->setFrom('alaziiammar@example.com', 'Some One'); //this is email will send the message for recevire
-        $mail->addAddress($email);
+                $mail->setFrom($_SESSION['z'], 'Some One'); //this is email will send the message for recevire
+                $mail->addAddress($email);
 
-        #الرسالة تتكون من قسمين الموضوع و المحتوى
-        $mail->Subject =  $subject;
+                #الرسالة تتكون من قسمين الموضوع و المحتوى
+                $mail->Subject =  $subject;
 
-        #المحتوى ممكن يكون رسالة عادية او قالب تم انشائه عن طريق الج تي ام ال وكذلك سي  اس اس
-        $mail->Body = strip_tags($message);
-        if (!empty($fie)) {
-            $mail->addAttachment($fie);
-        }
-        //send file to recevire
-        $mail->send();
-    } //end if 
+                #المحتوى ممكن يكون رسالة عادية او قالب تم انشائه عن طريق الج تي ام ال وكذلك سي  اس اس
+                $mail->Body = strip_tags($message);
+                if (!empty($fie)) {
+                    $mail->addAttachment($fie);
+                }
+                //send file to recevire
+                $mail->send();
+            } //end if 
+    } //end else
     ?>
 </body>
 

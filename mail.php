@@ -8,20 +8,17 @@
 </head>
 <body>
     <form action="" method="post">
-        <input type="email" name="youremail" placeholder="Enter your email" id="">
+        <input type="text" name="email" placeholder="Enter your email" id="">
         <input type="text" name="password" placeholder="Password for email" id="">
         <button type="submit" name="login">Login</button>
     </form>
 </body>
-</html>
 <?php
-session_start();;
+session_start();
 if (isset($_POST['login'])){
-    $_SESSION['email']=$_POST['youremail'];
+    $_SESSION['z']=filter_var($_POST['email'],FILTER_VALIDATE_EMAIL);
     $password=$_POST['password'];
 }
-?>
-<?php
 //Import PHPMailer classes into the global namespace
 //These must be at the top of your script, not inside a function
 
@@ -39,8 +36,8 @@ $mail = new PHPMailer(true);
 $mail->isSMTP();                                            //Send using SMTP
 $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
 $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-$mail->Username   =  $_SESSION['email'];                     //SMTP username
-$mail->Password   = $password;                               //SMTP password
+$mail->Username   = $_SESSION['z'];                     //SMTP username
+$mail->Password   = $password; //here found eroor when import password from top                              //SMTP password
 $mail->SMTPSecure = 'ssl';         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
 
 
@@ -48,3 +45,7 @@ $mail->Port= 465;//465 this port is supported by gmail
  //Content
  $mail->isHTML(true);  //حتى الايميل يدعم رموز html ,css
  $mail->CharSet='UTF-8'; //ظفنه charset حتى الايميل يدعم جميع الروز او اللغات
+ if (isset($_POST['login'])){
+    echo '<script>location.replace("index.php")</script>';
+}
+?>
